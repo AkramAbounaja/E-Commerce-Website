@@ -8,6 +8,10 @@ function getTotal($arr) {
     $total = 0.00;
     //TODO do adding here
     foreach ($arr as $x)
+    #aa232/9-24-2022/In this problem I added the floats by also using a foreach array like problem 1. The loop adds every value to
+    # a total value that was established outside of the loop. At the end, i use a function called number_format which allowed
+    # me to round the total value to 2 decimal places while keeping the extra 0 in 0.10 as well, (var_export didnt allow this).
+    # It was displayed at the end with echo.
     {
         $total = $x + $total;
     }

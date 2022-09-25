@@ -10,6 +10,10 @@ function bePositive($arr) {
     //TODO use echo to output all of the values as positive (even if they were originally positive) 
     //hint: may want to use var_dump() to show final data types
     foreach($arr as $x){
+        #aa232/9-24-2022/In this problem, I changed all the values to positive by first using a foreach loop to loop
+        # through the array. For each value, the loop checks if it is less than 0 (which means that it is negative)
+        #and if it is, to echo out the value multiplied by -1 (to make the value positive). 
+        #If it isn't the else statement is run and it echos out the unchanged value (because it is already positive).      
         if ($x < 0){
             echo $x*-1;
             #var_dump($x*-1);

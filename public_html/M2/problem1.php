@@ -9,6 +9,9 @@ function processArray($arr) {
     echo "<br>Odds output:<br>";
     //TODO add logic here to echo out only odd values
     foreach ($arr as $x) 
+    #aa232/9-24-2022/I am attempting to echo out only odd values by using a foreach loop that works well with arrays to
+    #go through every value in the array specified and check if the value is not divisible by 2 by checking if the remainder
+    #when dividing is not 0 and if it isn't to echo it because it is odd.
     {
         if($x %2 !=0){
             echo $x;
