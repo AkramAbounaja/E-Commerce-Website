@@ -70,5 +70,19 @@ if (isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["confirm
         echo "Welcome, $email";
         //TODO 4
     }
+    if (!$hasError) {
+        //TODO 4
+        //echo "Welcome, $email";
+        $hash = password_hash($password, PASSWORD_BCRYPT);
+        $db = getDB();
+        $stmt = $db->prepare("INSERT INTO Users (email, password) VALUES(:email, :password)");
+        try {
+            $stmt->execute([":email" => $email, ":password" => $hash]);
+            echo "Successfully registered!";
+        } catch (Exception $e) {
+            echo "There was a problem registering";
+            echo "<pre>" . var_export($e, true) . "</pre>";
+        }
+    }  
 }
 ?>
