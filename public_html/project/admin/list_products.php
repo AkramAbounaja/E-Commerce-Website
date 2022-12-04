@@ -39,12 +39,13 @@ try {
                         <p class="card-text">Description: <?php se($item, "description"); ?></p>
                     </div>
                     <div class="card-footer">
-                        Cost: <?php se($item, "cost"); ?>
+                        Cost: <?php se($item, "unit_price"); ?>
                         <form method="POST" action="cart_alt.php">
                             <input type="hidden" name="item_id" value="<?php se($item, "id");?>"/>
                             <input type="hidden" name="action" value="add"/>
                             <input type="number" name="desired_quantity" value="1" min="1" max="<?php se($item, "stock");?>"/>
                             <input type="submit" class="btn btn-primary" value="Add to Cart"/>
+                            <a class="btn btn-primary" href="edit_products.php?id=<?php echo $item["id"];?>">Edit</a>
                         </form>
                     </div>
                 </div>

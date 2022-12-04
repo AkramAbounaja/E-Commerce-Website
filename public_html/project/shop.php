@@ -160,6 +160,10 @@ if (isset($_POST["submitPrice"])) {
                     </div>
                     <div class="card-footer">
                         Cost: <?php se($item, "unit_price"); ?>
+                        <?php if (has_role("Admin")) : ?>
+                            <a class="btn btn-primary" href="admin/edit_products.php?id=<?php echo $item["id"];?>">Edit</a>
+                        <?php endif; ?>
+                            <a class="btn btn-primary" href="product_details.php?id=<?php echo $item["id"];?>">Details</a>
                         <form method="POST" action="cart.php">
                             <input type="hidden" name="item_id" value="<?php se($item, "id");?>"/>
                             <input type="hidden" name="action" value="add"/>
