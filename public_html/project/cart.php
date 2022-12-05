@@ -64,6 +64,7 @@ if (!empty($action)) {
                 error_log(var_export($e, true));
                 flash("Error deleting items", "danger");
             }
+            break;
             case "clear":
                 $query = "DELETE FROM Products_Cart WHERE user_id = :uid";
                 $stmt = $db->prepare($query);
