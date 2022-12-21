@@ -144,6 +144,7 @@ try {
         <?php endif; ?>
         <tr>
             <td colspan="100%">Total: $<?php se($total, null, 0); ?></td>
+            <?php $_SESSION['total_cost'] = strval($total); ?>
         </tr>
         <?php if (count($cart) != 0) : ?>
                 <td>
@@ -151,6 +152,7 @@ try {
                         <input type="hidden" name="cart_id" value="<?php se($c, "id"); ?>" />
                         <input type="hidden" name="action" value="clear" />
                         <input type="submit" class="btn btn-danger" value="Clear Items" />
+                        <a class="btn btn-primary" href="checkout.php">Checkout</a>
                     </form>
                 </td>
         <?php endif; ?>
