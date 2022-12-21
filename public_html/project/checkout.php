@@ -72,6 +72,7 @@ require(__DIR__ . "/../../partials/nav.php");
                             //if successful, flash success message and redirect to confirmation page
                             flash(data["message"], "success");
                             $id = data["prevOrderID"]
+                            $_SESSION['pOrderID'] = data["prevOrderID"]
                             setTimeout(function(){ window.location.href = "order_confirmation.php?prevOrderID=" + $id; }, 3000);
                                               }
                         else
