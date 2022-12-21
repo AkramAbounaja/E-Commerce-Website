@@ -7,8 +7,8 @@ if (isset($_POST["address"]) && isset($_POST["total_price"]) && isset($_POST["pa
     require_once(__DIR__ . "/../../../lib/functions.php");
     $user_id = (int)se($_POST, "user_id", 0, false);
     $address = se($_POST, "address", "", false);
-    $total_pice = floatval(se($_POST,"money_recieved", 000.00,false));
-    $true_pice = floatval(se($_POST,"total_price", 000.00,false));
+    $money_recieved = floatval(se($_POST,"money_recieved", 000.00,false));
+    $total_price = floatval(se($_POST,"total_price", 000.00,false));
     $payment_method = se($_POST, "payment_method", "Unknown payment method", false);
     $isValid = true;
     $errors = [];
@@ -22,7 +22,7 @@ if (isset($_POST["address"]) && isset($_POST["total_price"]) && isset($_POST["pa
         array_push($errors,"Invalid address");
         $isValid = false;
     }
-    if ($total_pice <= 000.00 || $total_pice !== $true_pice) {
+    if ($money_recieved <= 000.00 || $money_recieved !== $total_price) {
         array_push($errors, "Invalid total price");
         $isValid = false;
     }
