@@ -71,8 +71,9 @@ require(__DIR__ . "/../../partials/nav.php");
                         {
                             //if successful, flash success message and redirect to confirmation page
                             flash(data["message"], "success");
-                            setTimeout(function(){ window.location.href = "confirmation_page.php"; }, 3000);
-                        }
+                            $id = data["prevOrderID"]
+                            setTimeout(function(){ window.location.href = "order_confirmation.php?prevOrderID=" + $id; }, 3000);
+                                              }
                         else
                         {
                             //if not successful, flash warning message and redirect back to shop so user can re-add items
@@ -251,5 +252,5 @@ require(__DIR__ . "/../../partials/nav.php");
 </form>
 </div>
 <?php
-require(__DIR__ . "/../../partials/flash.php");
+require(__DIR__ . "/../../partials/footer.php");
 ?>
