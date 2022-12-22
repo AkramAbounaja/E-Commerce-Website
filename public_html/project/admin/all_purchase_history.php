@@ -47,7 +47,7 @@ try {
                             <p class="card-text">Deliever To: <?php se($item, "address"); ?></p>
                         </div>
                         <div class="card-footer">
-                        <a class="btn btn-primary" href="admin_order_details.php?prevOrderID=<?php echo se($item, "id"); ?>">More Details</a>
+                        <a class="btn btn-primary" href="/project/order_details.php?prevOrderID=<?php echo se($item, "id"); ?>">More Details</a>
                         </div>
                     </div>
                 </div>
