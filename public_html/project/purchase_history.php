@@ -29,7 +29,7 @@ try {
     }
 </style>
 <h1 id="myCart" class="center">Your Orders</h1>
-    <p class ="center">Thank you for shopping!</p>
+    <!-- <p class ="center">Thank you for shopping!</p> -->
     <div class="row row-cols-1 row-cols-md-5 g-4">
         <?php if (count($results) > 0) : ?>
 
@@ -45,7 +45,7 @@ try {
                             <p class="card-text">Deliever To: <?php se($item, "address"); ?></p>
                         </div>
                         <div class="card-footer">
-                        <a class="btn btn-primary" href="order_confirmation.php?prevOrderID=<?php echo se($item, "id"); ?>">More Details</a>
+                        <a class="btn btn-primary" href="order_details.php?prevOrderID=<?php echo se($item, "id"); ?>">More Details</a>
                         </div>
                     </div>
                 </div>
