@@ -3,9 +3,12 @@ require_once(__DIR__ . "/../../partials/nav.php");
 is_logged_in(true);
 ?>
 <?php
-if (isset($_POST["save"])) {
+$user_id = se($_GET, "id", get_user_id(), false);
+$matchUser = $user_id === get_user_id();
+if (isset($_POST["save"]) & $matchUser) {
     $email = se($_POST, "email", null, false);
     $username = se($_POST, "username", null, false);
+    $visibility = !!se($_POST, "visibility", false, false) ? 1 : 0;
     $hasError = false;
     //sanitize
     $email = sanitize_email($email);
@@ -19,9 +22,9 @@ if (isset($_POST["save"])) {
         $hasError = true;
     }
     if (!$hasError) {
-        $params = [":email" => $email, ":username" => $username, ":id" => get_user_id()];
+        $params = [":email" => $email, ":username" => $username, ":id" => get_user_id(), ":visibility" => $visibility];
         $db = getDB();
-        $stmt = $db->prepare("UPDATE Users set email = :email, username = :username where id = :id");
+        $stmt = $db->prepare("UPDATE Users set email = :email, username = :username, visibility = :visibility where id = :id");
         try {
             $stmt->execute($params);
             flash("Profile saved", "success");
@@ -92,9 +95,34 @@ if (isset($_POST["save"])) {
 <?php
 $email = get_user_email();
 $username = get_username();
+$isPublic = false;
+$db = getDB();
+$stmt = $db->prepare("SELECT username, visibility from Users where id = :id");
+try {
+    $stmt->execute([":id" => $user_id]); 
+    $r = $stmt->fetch(PDO::FETCH_ASSOC);
+    $username = se($r, "username", "", false);
+    $isPublic = se($r, "visibility", 0, false) != 0;
+    if (!$isPublic) { 
+        if(!$matchUser)
+        {
+            flash("User's profile is private", "warning");
+        }
+    }
+} catch (Exception $e) {
+    echo "<pre>" . var_export($e->errorInfo, true) . "</pre>";
+}
 ?>
 <div class="container-fluid">
     <h1>Profile</h1>
+    <?php if ($matchUser): ?>
+    <form method="POST" onsubmit="return validate(this);">
+            <div class="mb-3">
+                <div class="form-check form-switch">
+                    <input name="visibility" class="form-check-input" type="checkbox" id="publicCheckBox" <?php if ($isPublic) echo "checked"; ?>>
+                    <label class="form-check-label" for="publicCheckBox">Make Profile Public</label>
+                </div>
+            </div>
     <form method="POST" onsubmit="return validate(this);">
         <div class="mb-3">
             <label class="form-label" for="email">Email</label>
@@ -120,6 +148,10 @@ $username = get_username();
         </div>
         <input type="submit" class="mt-3 btn btn-primary" value="Update Profile" name="save" />
     </form>
+    <?php else: ?>
+        <div class="card-body">
+        <p class="card-text">Username: <?php se($username); ?></p>
+        <?php endif; ?>
 </div>
 
 <script>
