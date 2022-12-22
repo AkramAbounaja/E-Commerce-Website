@@ -23,6 +23,7 @@ if (isset($_POST["address"]) && isset($_POST["total_price"]) && isset($_POST["pa
         $isValid = false;
     }
     if ($money_recieved <= 000.00 || $money_recieved !== $total_price) {
+        // aa232 12/21/22
         array_push($errors, "Invalid total price");
         $isValid = false;
     }
@@ -45,11 +46,13 @@ if (isset($_POST["address"]) && isset($_POST["total_price"]) && isset($_POST["pa
                 {
                      $empty_str = "";
                     //use variables that we got before to check validity and return a message if validity fails. String concatination is used to create the message.
+                    //aa232 12/21/22
                     foreach($results as $res)
                     {
                         if((floatval($res['cart_cost']) != floatval($res['product_cost'])) && ((int) $res['desired_quantity'] > (int) $res['stock']))
                         {
-                            $str_to_attach = $res["name"] . "cannot be purchased because the cart price: " . $res['cart_cost'] . " has not been updated to the current price: " . " " . $res['product_cost'] . " and the quantity in cart: " . $res['desired_quantity'] . " is greater than the available stock: " . $res['stock'];
+                            $str_to_attach = $res["name"] . "cannot be purchased because the cart price: " . $res['cart_cost'] . " has not been updated to the current price: " . " " . $res['product_cost'] . " 
+                            and the quantity in cart: " . $res['desired_quantity'] . " is greater than the available stock: " . $res['stock'];
                         }
                         else if((int) $res['desired_quantity'] > (int) $res['stock'])
                         {
@@ -69,7 +72,7 @@ if (isset($_POST["address"]) && isset($_POST["total_price"]) && isset($_POST["pa
                     $stmt->bindValue(":uid", get_user_id(), PDO::PARAM_INT);
                     try {
                         $stmt->execute();
-                        flash("Cart has been cleared. Please re-add the products to clear any errors ", "success");
+                        flash("Cart has been cleared. Please re-add the products to clear any errors ", "danger");
                     } catch (PDOException $e) {
                         error_log(var_export($e, true));
                         flash("Error clearing items", "danger");
