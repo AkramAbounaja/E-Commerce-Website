@@ -1,5 +1,5 @@
 <?php
-require(__DIR__ . "/../../../partials/nav.php");
+require(__DIR__ . "/../../partials/nav.php");
 $results = [];
 $id = se($_GET, "prevOrderID", -1, false);
 //var_dump($_GET['prevOrderID']);
@@ -81,5 +81,5 @@ try {
     </div>
 </div>
 <?php
-    require(__DIR__ . "/../../../partials/footer.php");
+    require(__DIR__ . "/../../partials/footer.php");
 ?>
