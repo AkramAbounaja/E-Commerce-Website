@@ -79,6 +79,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
                     unset($user["password"]);
                     if (password_verify($password, $hash)) {
                         //flash("Weclome $email");
+                        $_SESSION['user_id'] = $user['id'];
                         $_SESSION["user"] = $user; //sets our session data from db
                         //lookup potential roles
                         $stmt = $db->prepare("SELECT Roles.name FROM Roles 
