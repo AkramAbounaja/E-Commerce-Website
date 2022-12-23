@@ -54,7 +54,7 @@ if(!empty($itemName))
     array_push($whereQuery,"name like :name");
     $params[":name"] = "%" . $itemName . "%";
 }
-$query .= " where visibility = 1 and stock >= 0 and unit_price > 0 ";
+$query .= " where visibility >= 0 and stock >= 0 and unit_price > 0 ";
 if(count($whereQuery) > 0)
 {
     $query .= " and " . join(" and ",$whereQuery);
@@ -235,10 +235,10 @@ try {
                         <div class="card-footer">
                             Cost: $<?php se($item, "unit_price"); ?>
                             <?php if (has_role("Admin")) : ?>
-                                <a class="btn btn-primary" href="admin/edit_product.php?id=<?php echo $item["id"]; ?>">Edit</a>
+                                <a class="btn btn-primary" href="edit_products.php?id=<?php echo $item["id"]; ?>">Edit</a>
                             <?php endif; ?>
-                            <a class="btn btn-primary" href="product_details.php?id=<?php echo $item["id"]; ?>">Details</a>
-                            <form method="POST" action="cart.php">
+                            <a class="btn btn-primary" href="/project/product_details.php?id=<?php echo $item["id"]; ?>">Details</a>
+                            <form method="POST" action="/project/cart.php">
                             <input type="hidden" name="item_id" value="<?php se($item, "id");?>"/>
                             <input type="hidden" name="action" value="add"/>
                             <input type="number" name="desired_quantity" value="1" min="1" max="<?php se($item, "stock");?>"/>
